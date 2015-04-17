@@ -5,7 +5,8 @@ public class WallCollision : MonoBehaviour {
 
 	public Movement bossMovement;
 
-	void OnTriggerEnter(){
-		bossMovement.SetNextNodeOnPath();
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
+			bossMovement.SetNextNodeOnPath();
 	}
 }

@@ -49,6 +49,18 @@ public class SpaceShipController : MonoBehaviour {
 
         myRigidbody.velocity = inverted;
 
+		transform.LookAt(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+
     }	
 
+	void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.layer == LayerMask.NameToLayer("Wall"))
+			myRigidbody.velocity = Vector3.zero;
+	}
+
+	void OnTriggerEnter(Collider other){
+		if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
+			Application.LoadLevel(0);
+	}
 }
