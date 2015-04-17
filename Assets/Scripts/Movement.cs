@@ -45,9 +45,9 @@ public class Movement : MonoBehaviour {
         while (true) {
 
             Vector3 walkVector = (nextPathNode.node.position - transform.position).normalized * speed * Time.deltaTime;
-            transform.Translate(walkVector, Space.World);
+            transform.Translate(Vector3.left, Space.Self);
 
-            if (distance > reachDistance) {
+            if (distance < reachDistance) {
                 getNextPathNode();
             }
 
