@@ -15,6 +15,7 @@ public class Movement : MonoBehaviour {
     float reachDistance = 0.3f;
 
 
+	public GameObject bossBody;
     public float speed = 1;
 
     void Awake() {
@@ -27,13 +28,13 @@ public class Movement : MonoBehaviour {
     }
 
     public void StartWalkingOnPath() {
-        getNextPathNode();
+        SetNextNodeOnPath();
 
         StopAllCoroutines();
         StartCoroutine(walkToNextNode());
     }
 
-    void getNextPathNode() {
+    public void SetNextNodeOnPath() {
         nextPathNode = myPath.nodes[nextPathNodeIndex];
         nextPathNodeIndex = ++nextPathNodeIndex % myPath.nodes.Length;
     }
@@ -46,10 +47,16 @@ public class Movement : MonoBehaviour {
 
             Vector3 walkVector = (nextPathNode.node.position - transform.position).normalized * speed * Time.deltaTime;
             transform.Translate(walkVector, Space.World);
+			//bossBody.transform.LookAt(Vector3.Slerp(bossBody.transform.forward,nextPathNode.node.transform.position,0.5f));
+			bossBody.transform.rotation = Quaternion.Slerp(
+				bossBody.transform.rotation,
+				Quaternion.LookRotation(nextPathNode.node.position - transform.position),
+				speed * Time.deltaTime
+			);
             distance = Vector3.Distance(transform.position, nextPathNode.node.position);
 
             if (distance < reachDistance) {
-                getNextPathNode();
+                SetNextNodeOnPath();
             }
 
             yield return null;
