@@ -8,5 +8,7 @@ public class WallCollision : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
 		if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
 			bossMovement.SetNextNodeOnPath();
+		else if (other.gameObject.layer == LayerMask.NameToLayer("Bubble"))
+			other.GetComponent<Rigidbody>().velocity = -other.GetComponent<Rigidbody>().velocity;
 	}
 }
