@@ -46,6 +46,18 @@ public class Movement : MonoBehaviour {
 
             Vector3 walkVector = (nextPathNode.node.position - transform.position).normalized * speed * Time.deltaTime;
             transform.Translate(walkVector, Space.World);
+            //transform.position = Vector3.Lerp(
+            //    transform.position,
+            //    nextPathNode.node.position,
+            //    speed * Time.deltaTime
+            //);
+
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(nextPathNode.node.position - transform.position),
+                speed * Time.deltaTime
+            );
+            
             distance = Vector3.Distance(transform.position, nextPathNode.node.position);
 
             if (distance < reachDistance) {
