@@ -50,7 +50,7 @@ public class SpaceShipController : MonoBehaviour {
         myRigidbody.velocity = inverted;
 
 		Vector3 target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-		target = new Vector3(target.x, 0f, target.z);
+		target = new Vector3(target.x, target.y, 0f);
 		transform.LookAt(target);
 
     }	

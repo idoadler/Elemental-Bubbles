@@ -50,7 +50,7 @@ public class Movement : MonoBehaviour {
 			//bossBody.transform.LookAt(Vector3.Slerp(bossBody.transform.forward,nextPathNode.node.transform.position,0.5f));
 			bossBody.transform.rotation = Quaternion.Slerp(
 				bossBody.transform.rotation,
-				Quaternion.LookRotation(nextPathNode.node.position - transform.position),
+				Quaternion.LookRotation(nextPathNode.node.position - transform.position,Vector3.back),
 				speed * Time.deltaTime
 			);
             distance = Vector3.Distance(transform.position, nextPathNode.node.position);
