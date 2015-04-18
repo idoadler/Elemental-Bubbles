@@ -6,7 +6,7 @@ using System.Collections;
 
 public class Movement : MonoBehaviour {
 
-
+	public static Movement instance;
 
     Pathway myPath;
 
@@ -14,13 +14,15 @@ public class Movement : MonoBehaviour {
     PathNode nextPathNode = null;
     float reachDistance = 0.3f;
 
+	public Transform lever;
+	public Transform leverBase;
 
 	public GameObject bossBody;
     public float speed = 1;
 
     void Awake() {
         myPath = GetComponent<Pathway>();
-
+		instance = this;
     }
 
     void Start() {
@@ -47,7 +49,6 @@ public class Movement : MonoBehaviour {
 
             Vector3 walkVector = (nextPathNode.node.position - transform.position).normalized * speed * Time.deltaTime;
             transform.Translate(walkVector, Space.World);
-			//bossBody.transform.LookAt(Vector3.Slerp(bossBody.transform.forward,nextPathNode.node.transform.position,0.5f));
 			bossBody.transform.rotation = Quaternion.Slerp(
 				bossBody.transform.rotation,
 				Quaternion.LookRotation(nextPathNode.node.position - transform.position,Vector3.back),
