@@ -11,7 +11,7 @@ public class Shoot : MonoBehaviour {
 	void Start()
 	{
 		next = Random.Range (0,bullets.Length);
-		gameObject.GetComponent<MeshRenderer>().sharedMaterial.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
+		gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
 	}
 
 	void Update() {
@@ -20,7 +20,7 @@ public class Shoot : MonoBehaviour {
 			GameObject projectile = (GameObject)Instantiate( bullets[next], transform.position, Quaternion.identity);
 			projectile.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * speed;
 			next = Random.Range (0,bullets.Length);
-			gameObject.GetComponent<MeshRenderer>().sharedMaterial.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
+			gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
 		}
 	}
 }
