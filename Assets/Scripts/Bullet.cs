@@ -6,9 +6,17 @@ public class Bullet : MonoBehaviour {
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
 		{
-			gameObject.layer = LayerMask.NameToLayer("Boss");
-			Destroy(gameObject.GetComponent<Rigidbody>());
-			gameObject.transform.SetParent(other.transform.parent);
+			if (other.gameObject.GetComponent<MeshRenderer>().material.color == gameObject.GetComponent<MeshRenderer>().material.color)
+			{
+				Destroy( other.gameObject);
+				Destroy(gameObject);
+			}
+			else
+			{
+				gameObject.layer = LayerMask.NameToLayer("Boss");
+				Destroy(gameObject.GetComponent<Rigidbody>());
+				gameObject.transform.SetParent(other.transform.parent);
+			}
 		}
 	}
 }
