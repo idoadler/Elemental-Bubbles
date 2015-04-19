@@ -486,7 +486,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 439128, guid: 1b09bfd8ee4d5314aa50c97ac25a8c4e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 439128, guid: 1b09bfd8ee4d5314aa50c97ac25a8c4e, type: 2}
       propertyPath: m_LocalScale.x
@@ -541,7 +541,7 @@ Transform:
   - {fileID: 747393680}
   - {fileID: 857258725}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
 --- !u!114 &103840144
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,7 +670,7 @@ Transform:
   m_Children:
   - {fileID: 1893885718}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!54 &130299748
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -864,7 +864,7 @@ Transform:
   - {fileID: 1157384580}
   - {fileID: 769296861}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
 --- !u!4 &268045407 stripped
 Transform:
   m_PrefabParentObject: {fileID: 411362, guid: 3d1d1558585a9254f83094e5dd9cd28b, type: 2}
@@ -980,73 +980,11 @@ Transform:
   - {fileID: 2041187965}
   - {fileID: 10626502}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
 --- !u!4 &557324750 stripped
 Transform:
   m_PrefabParentObject: {fileID: 411362, guid: e336a93559723824a8eaacd54979af86, type: 2}
   m_PrefabInternal: {fileID: 951016385}
---- !u!1 &676094595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 109362, guid: 562eaabc8c3ad407dbd885a343260e83, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 676094599}
-  - 33: {fileID: 676094598}
-  - 23: {fileID: 676094596}
-  m_Layer: 0
-  m_Name: Plane
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!23 &676094596
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 2354074, guid: 562eaabc8c3ad407dbd885a343260e83,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 676094595}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_Materials:
-  - {fileID: 2100000, guid: e0db406d723f9fe48bd7cfba726c7778, type: 2}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_UseLightProbes: 1
-  m_ReflectionProbeUsage: 1
-  m_ProbeAnchor: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 1
-  m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
---- !u!33 &676094598
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 3343018, guid: 562eaabc8c3ad407dbd885a343260e83,
-    type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 676094595}
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &676094599
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 455548, guid: 562eaabc8c3ad407dbd885a343260e83, type: 2}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 676094595}
-  m_LocalRotation: {x: -.707106352, y: 0, z: 0, w: .707107246}
-  m_LocalPosition: {x: .910000026, y: -13.6899996, z: 1}
-  m_LocalScale: {x: 2.22099924, y: 1, z: 1.13141835}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
 --- !u!1 &693751149
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1440,10 @@ Prefab:
       propertyPath: boss
       value: 
       objectReference: {fileID: 857258729}
+    - target: {fileID: 166548, guid: e9fc65196dfde6f48ab7b9782c2b7d26, type: 2}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5486330, guid: e9fc65196dfde6f48ab7b9782c2b7d26, type: 2}
     - {fileID: 0}
@@ -1591,6 +1533,103 @@ Prefab:
 Transform:
   m_PrefabParentObject: {fileID: 411362, guid: e9fc65196dfde6f48ab7b9782c2b7d26, type: 2}
   m_PrefabInternal: {fileID: 949922940}
+--- !u!1 &1036261016
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1036261018}
+  - 82: {fileID: 1036261017}
+  m_Layer: 0
+  m_Name: Destiny Day
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1036261017
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036261016}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: f9f0a97bcf7be734da32912e42c95acb, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+--- !u!4 &1036261018
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036261016}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .172519684, y: .380775452, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
 --- !u!212 &1119478545 stripped
 SpriteRenderer:
   m_PrefabParentObject: {fileID: 21291084, guid: d178b881416a8e547b50e1f983dcc979,
@@ -2154,7 +2193,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
 --- !u!1001 &1872058264
 Prefab:
   m_ObjectHideFlags: 0
