@@ -9,7 +9,7 @@ public class Boss1 : MonoBehaviour {
 	public SpriteRenderer[] indicators;
 	public int health = 3;
 
-	public void hit()
+	private void hit()
 	{
 		if (started == false) 
 		{
@@ -27,20 +27,23 @@ public class Boss1 : MonoBehaviour {
 	}
 
 	private int color;
-	void init()
+	public void init()
 	{
+		started = true;
 		color = Random.Range (0, colors.Length);
 		foreach (SpriteRenderer renderer in indicators)
 			renderer.color = colors [color];
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
+	void OnTriggerEnter(Collider other)
+	{
+		if (other.gameObject.layer == LayerMask.NameToLayer ("Bubble")) {
+			BubbleConnector otherBubble = other.GetComponent<BubbleConnector> ();
+			if (otherBubble.color == colors[color])
+			{
+				Destroy(other.gameObject);
+				hit();
+			}
+		}
 	}
 }
