@@ -23,7 +23,7 @@ public class Shoot : MonoBehaviour {
 	{
 		next = Random.Range (0,bullets.Length);
 		shipClueColor = getNextColor();
-		gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
+//		gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
 
 		StartCoroutine(clueColorCo());
 	}
@@ -38,6 +38,8 @@ public class Shoot : MonoBehaviour {
 		isInMiddleOfShot = true;
 
 		Color nextColor = getNextColor();
+		int current = next;
+		next = Random.Range (0,bullets.Length);
 
 		float timePassed = 0;
 		while( timePassed < glowTime ){
@@ -76,13 +78,13 @@ public class Shoot : MonoBehaviour {
 			yield return null;
 		}
 
-		shoot ();
+		shoot (current);
 
 		isInMiddleOfShot = false;
 	}
 
 	Color getNextColor(){
-		return bullets[next].myColor;
+		return bullets[next].color;
 	}
 
 	IEnumerator clueColorCo(){
@@ -101,11 +103,10 @@ public class Shoot : MonoBehaviour {
 		}
 	}
 
-	void shoot(){
-		GameObject projectile = (GameObject)Instantiate( bullets[next].gameObject, transform.position, Quaternion.identity);
+	void shoot(int index){
+		GameObject projectile = (GameObject)Instantiate( bullets[index].gameObject, transform.position, Quaternion.identity);
 		projectile.GetComponent<Rigidbody>().velocity = gameObject.transform.forward * speed;
-		next = Random.Range (0,bullets.Length);
-		gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
+		//gameObject.GetComponent<MeshRenderer>().material.color = bullets[next].GetComponent<MeshRenderer>().sharedMaterial.color;
 
 		shipClueColor = getNextColor();
 	}

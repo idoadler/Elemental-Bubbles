@@ -3,14 +3,6 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public enum EBubbleColor{
-	RED,
-	BLUE,
-	YELLOW,
-	GREEN,
-	SILVER
-}
-
 public class BubbleConnector : MonoBehaviour {
 
 	static List<BubbleConnector> registeredBubbles = new List<BubbleConnector>();
@@ -18,11 +10,12 @@ public class BubbleConnector : MonoBehaviour {
 		registeredBubbles.Add(myself);
 	}
 
-	public EBubbleColor color;	
-	public Color myColor;
+	//public EBubbleColor color;	
+	public Boss1 boss;
+	public Color color;
 	public List<BubbleConnector> connections = new List<BubbleConnector>();
 
-	public bool amBoss = false;
+	public bool isRoot = false;
 
 	[HideInInspector]
 	public bool checkBool = false;
@@ -62,7 +55,7 @@ public class BubbleConnector : MonoBehaviour {
 		randomSpeed = Random.Range (-30.0f, 30.0f);
 	}
 
-	void Update(){
+	/*void Update(){
 		if( amBoss == false){
 			if( isFree == true ){
 				transform.Rotate(randomRotate, randomSpeed * Time.deltaTime * 5);
@@ -73,15 +66,15 @@ public class BubbleConnector : MonoBehaviour {
 				);
 			}
 		}
-	}
+	}*/
 
 	void OnTriggerEnter(Collider other)
 	{
-		if (other.gameObject.layer == LayerMask.NameToLayer("Boss"))
+		if (gameObject.layer == LayerMask.NameToLayer("Bubble") && other.gameObject.layer == LayerMask.NameToLayer("Boss"))
 		{
 			BubbleConnector otherBubble = other.GetComponent<BubbleConnector>();
 
-			if (otherBubble.color == color)
+			if (otherBubble != null && otherBubble.color == color)
 			{
 				bool isThirdInChain = false;
 				foreach(BubbleConnector bubble in otherBubble.connections ){
@@ -96,21 +89,23 @@ public class BubbleConnector : MonoBehaviour {
 
 					checkAndDestroyLeftovers();
 				}else{
-					connectNewBubble(otherBubble);
+					connectNewBubble(other);
 				}
 			}
 			else
 			{
-				connectNewBubble(otherBubble);
+				if (otherBubble == null)
+					this.isRoot = true;
+				connectNewBubble(other);
 			}
 		}
 	}
 
-	void connectNewBubble(BubbleConnector other){
+	void connectNewBubble(Collider other){
 		if( other == this )
 			return;
 
-		List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles( Vector3.Distance(transform.position, other.transform.position) * 1.1f);
+		List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles( transform.GetComponent<SphereCollider>().radius * 1.1f);
 		foreach( BubbleConnector bubble in allCloseBubbles ){
 			if( bubble.connections.Contains(this) == false ){
 				bubble.connections.Add(this);
@@ -126,13 +121,13 @@ public class BubbleConnector : MonoBehaviour {
 		isFree = false;
 	}
 
-	public bool CheckIfAmConnectedToBoss(){
+	public bool CheckIfAmConnectedToRoot(){
 
 		if( isChainToDestroy == true ){
 			return true;
 		}
 
-		if( amBoss == true ){
+		if( isRoot == true ){
 			return true;
 		}
 
@@ -147,7 +142,7 @@ public class BubbleConnector : MonoBehaviour {
 
 			foreach(BubbleConnector bubble in checkList){
 
-				if( bubble.amBoss == true ){
+				if( bubble.isRoot == true ){
 					uncheckAllBubbles();
 					return true;
 				}
@@ -179,13 +174,13 @@ public class BubbleConnector : MonoBehaviour {
 		}
 
 		foreach(BubbleConnector bubble in connections){
-			if( bubble.color == color && bubble.amBoss == false){
+			if( bubble.color == color){
 				bubble.DestroyMeAndMyChain();
 			}
 		}
 
 		connections.Clear();
-		connections = null;
+		//connections = null;
 		Destroy (gameObject);
 
 		isChainToDestroy = true;
@@ -195,7 +190,7 @@ public class BubbleConnector : MonoBehaviour {
 		List<BubbleConnector> returnedConnections = new List<BubbleConnector>();
 
 		foreach(BubbleConnector bubble in registeredBubbles){
-			if( bubble != this ){
+			if( bubble != this){
 				if( Vector3.Distance(bubble.transform.position, transform.position) <= minConnectionDistance ){
 					returnedConnections.Add(bubble);
 				}
@@ -208,10 +203,8 @@ public class BubbleConnector : MonoBehaviour {
 	void checkAndDestroyLeftovers(){
 		List<BubbleConnector> doomedList = new List<BubbleConnector>();
 		foreach(BubbleConnector bubble in registeredBubbles){
-			if( bubble.amBoss == false ){
-				if( bubble.CheckIfAmConnectedToBoss() == false ){
-					doomedList.Add(bubble);
-				}
+			if( bubble.CheckIfAmConnectedToRoot() == false ){
+				doomedList.Add(bubble);
 			}
 		}
 
@@ -235,6 +228,8 @@ public class BubbleConnector : MonoBehaviour {
 	}
 
 	void OnDestroy(){
+		if (isRoot && boss != null)
+			boss.init ();
 		registeredBubbles.Remove(this);
 	}
 
