@@ -10,7 +10,8 @@ public class BubbleConnector : MonoBehaviour {
 		registeredBubbles.Add(myself);
 	}
 
-	//public EBubbleColor color;	
+	//public EBubbleColor color;
+	const float BUBBLE_SIZE = 1.3f;
 	public Boss1 boss;
 	public Color color;
 	public List<BubbleConnector> connections = new List<BubbleConnector>();
@@ -35,7 +36,7 @@ public class BubbleConnector : MonoBehaviour {
 
 	void Start(){
 		if( isPresentAtStart == true ){
-			List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles(1.3f);
+			List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles(BUBBLE_SIZE);
 			foreach( BubbleConnector bubble in allCloseBubbles ){
 				if( bubble.connections.Contains(this) == false ){
 					bubble.connections.Add(this);
@@ -105,7 +106,7 @@ public class BubbleConnector : MonoBehaviour {
 		if( other == this )
 			return;
 
-		List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles( transform.GetComponent<SphereCollider>().radius * 1.1f);
+		List<BubbleConnector> allCloseBubbles = getAllConnectedBubbles(BUBBLE_SIZE);
 		foreach( BubbleConnector bubble in allCloseBubbles ){
 			if( bubble.connections.Contains(this) == false ){
 				bubble.connections.Add(this);

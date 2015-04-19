@@ -29,17 +29,20 @@ public class Boss1 : MonoBehaviour {
 	private int color;
 	public void init()
 	{
-		started = true;
-		color = Random.Range (0, colors.Length);
-		foreach (SpriteRenderer renderer in indicators)
-			renderer.color = colors [color];
+		if (started == false) 
+		{
+			started = true;
+			color = Random.Range (0, colors.Length);
+			foreach (SpriteRenderer renderer in indicators)
+				renderer.color = colors [color];
+		}
 	}
 
 	void OnTriggerEnter(Collider other)
 	{
 		if (other.gameObject.layer == LayerMask.NameToLayer ("Bubble")) {
 			BubbleConnector otherBubble = other.GetComponent<BubbleConnector> ();
-			if (otherBubble.color == colors[color])
+			if (otherBubble.color == colors[color] || !started)
 			{
 				Destroy(other.gameObject);
 				hit();
