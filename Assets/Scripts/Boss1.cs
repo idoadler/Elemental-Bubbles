@@ -8,6 +8,8 @@ public class Boss1 : MonoBehaviour {
 	public Color[] colors;
 	public SpriteRenderer[] indicators;
 	public int health = 3;
+    public AudioSource bigBoom;
+    public AudioSource smallBoom;
 
 	private void hit()
 	{
@@ -18,10 +20,13 @@ public class Boss1 : MonoBehaviour {
 		else 
 		{
 			health--;
-			if (health > 0)
-				init();
-			else
-				Destroy(transform.parent.gameObject);
+            if (health > 0)
+                init();
+            else
+            {
+                bigBoom.Play();
+                Destroy(transform.parent.gameObject);
+            }
 				// destroy shield and root
 		}
 	}
@@ -29,14 +34,12 @@ public class Boss1 : MonoBehaviour {
 	private int color;
 	public void init()
 	{
-		if (started == false) 
-		{
-			started = true;
-			color = Random.Range (0, colors.Length);
-			foreach (SpriteRenderer renderer in indicators)
-				renderer.color = colors [color];
-		}
-	}
+        smallBoom.Play();
+	    started = true;
+	    color = Random.Range (0, colors.Length);
+	    foreach (SpriteRenderer renderer in indicators)
+		    renderer.color = colors [color];
+    }
 
 	void OnTriggerEnter(Collider other)
 	{

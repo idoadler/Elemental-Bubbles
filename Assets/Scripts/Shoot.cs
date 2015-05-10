@@ -28,9 +28,13 @@ public class Shoot : MonoBehaviour {
 		StartCoroutine(clueColorCo());
 	}
 
+    bool first = true;
 	void Update() {
-		if (Input.GetMouseButtonDown(0) && isInMiddleOfShot == false ){
-			StartCoroutine(prepCo ());
+		if (Input.GetMouseButtonDown(0) && isInMiddleOfShot == false){
+            if (first)
+                first = false;
+            else
+			    StartCoroutine(prepCo ());
 		}
 	}
 

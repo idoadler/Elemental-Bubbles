@@ -9,6 +9,7 @@ public class SpaceShipController : MonoBehaviour {
     public float maxSpeed;
     public float accelaration;
     public float deaccelaration;
+    public GameObject enemy;
 
     Vector2 currentVelocity = Vector2.zero;
 
@@ -19,6 +20,8 @@ public class SpaceShipController : MonoBehaviour {
     }
 
     void Update() {
+        if (enemy == null)
+            Invoke("restart", 1);
 
         float deltaX = Input.GetAxis("Horizontal");
         float deltaY = Input.GetAxis("Vertical");
@@ -53,7 +56,12 @@ public class SpaceShipController : MonoBehaviour {
 		target = new Vector3(target.x, target.y, 0f);
 		transform.LookAt(target, Vector3.back);
 
-    }	
+    }
+
+    private void restart()
+    {
+        Application.LoadLevel(0);
+    }
 
 	void OnCollisionEnter(Collision collision)
 	{
