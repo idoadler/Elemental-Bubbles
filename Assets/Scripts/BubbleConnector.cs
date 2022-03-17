@@ -1,14 +1,9 @@
 ﻿using UnityEngine;
-
-using System.Collections;
 using System.Collections.Generic;
 
 public class BubbleConnector : MonoBehaviour {
 
 	static List<BubbleConnector> registeredBubbles = new List<BubbleConnector>();
-	static void Register(BubbleConnector myself){
-		registeredBubbles.Add(myself);
-	}
 
 	//public EBubbleColor color;
 	const float BUBBLE_SIZE = 1.3f;

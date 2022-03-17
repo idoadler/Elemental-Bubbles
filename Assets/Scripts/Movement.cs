@@ -5,24 +5,17 @@ using System.Collections;
 
 
 public class Movement : MonoBehaviour {
-
-	public static Movement instance;
-
     Pathway myPath;
 
     int nextPathNodeIndex = 0;
     PathNode nextPathNode = null;
     float reachDistance = 0.3f;
 
-	public Transform lever;
-	public Transform leverBase;
-
 	public GameObject bossBody;
     public float speed = 1;
 
     void Awake() {
         myPath = GetComponent<Pathway>();
-		instance = this;
     }
 
     void Start() {
